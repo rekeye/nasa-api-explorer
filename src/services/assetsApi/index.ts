@@ -8,7 +8,7 @@ export const fetchAssets = async (
   page: number = 1,
 ): Promise<ApiResponse> => {
   const response = await fetch(
-    `${API_URL}?q=${query}&media_type=${mediaType}&page=${page}`,
+    `${API_URL}?q=${query}&media_type=${mediaType}&page=${page}&page_size=10`,
   );
 
   if (!response.ok) {

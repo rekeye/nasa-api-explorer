@@ -7,10 +7,10 @@ interface AssetElementProps {
 const AssetElement = (props: AssetElementProps) => {
   return (
     <>
-      <div>
-        <h2>{props.asset.data[0].title}</h2>
+      <li className="rounded-md overflow-hidden">
         {props.asset.data[0].media_type === "image" && (
           <img
+            className="object-contain aspect-square"
             src={props.asset.links?.[0].href}
             alt={props.asset.data[0].title}
           />
@@ -20,7 +20,8 @@ const AssetElement = (props: AssetElementProps) => {
             <source src={props.asset.links?.[0].href} type="video/mp4" />
           </video>
         )}
-      </div>
+        <h2 className="text-center">{props.asset.data[0].title}</h2>
+      </li>
     </>
   );
 };

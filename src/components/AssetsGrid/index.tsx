@@ -32,7 +32,7 @@ const AssetsGrid: React.FC = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <ul className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-12">
       {data?.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
           {page.collection.items.map((item, i) => (
@@ -41,14 +41,17 @@ const AssetsGrid: React.FC = () => {
         </React.Fragment>
       ))}
 
-      <div ref={loadMoreRef} style={{ height: "20px", margin: "10px 0" }}>
+      <p
+        className="flex items-center justify-center col-span-full p-2 text-sm md:static"
+        ref={loadMoreRef}
+      >
         {isFetchingNextPage
           ? "Loading more..."
           : hasNextPage
             ? "Scroll to load more"
             : "No more results"}
-      </div>
-    </div>
+      </p>
+    </ul>
   );
 };
 

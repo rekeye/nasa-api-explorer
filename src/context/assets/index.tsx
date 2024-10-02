@@ -24,7 +24,7 @@ interface AssetsProviderProps {
 }
 
 export const AssetsProvider: React.FC<AssetsProviderProps> = ({ children }) => {
-  const [query, setQuery] = useState<string>("mars");
+  const [query, setQuery] = useState<string>("andromeda");
   const [mediaType, setMediaType] = useState<string>("image");
   const queryClient = useQueryClient();
 
