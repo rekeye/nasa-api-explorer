@@ -7,6 +7,7 @@ export default {
         // Using the NASA color guidelines found here https://nasa.github.io/nasawds-site/components/colors/
         background: {
           primary: "#061f4a",
+          gray: "#5b616b",
           white: "#f1f1f1",
         },
         primary: "#105bd8",

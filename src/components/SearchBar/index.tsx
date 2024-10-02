@@ -16,7 +16,7 @@ const SearchBar = () => {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md flex gap-2">
       <input
-        className="grow p-2 rounded-md outline-focus"
+        className="grow p-2 rounded-md outline-focus shadow-md"
         type="text"
         placeholder="Search NASA media..."
         value={searchTerm}
@@ -24,7 +24,7 @@ const SearchBar = () => {
       />
       <button
         type="submit"
-        className="h-10 w-10 flex items-center justify-center outline-focus bg-background-primary rounded-md"
+        className="h-10 w-10 flex items-center justify-center outline-focus bg-background-primary rounded-md shadow-md"
       >
         <SearchSvg height="20" width="20" />
       </button>

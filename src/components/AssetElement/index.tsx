@@ -7,7 +7,7 @@ interface AssetElementProps {
 const AssetElement = (props: AssetElementProps) => {
   return (
     <>
-      <li className="rounded-md overflow-hidden">
+      <li className="flex flex-col gap-2 pb-2 rounded-md overflow-hidden shadow-md bg-white">
         {props.asset.data[0].media_type === "image" && (
           <img
             className="object-contain aspect-square"
