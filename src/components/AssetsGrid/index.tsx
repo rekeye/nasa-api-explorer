@@ -1,0 +1,55 @@
+import React, { useEffect, useRef } from "react";
+import { useAssets } from "../../context/assets";
+import AssetElement from "../AssetElement";
+
+const AssetsGrid: React.FC = () => {
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useAssets();
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!hasNextPage || isFetchingNextPage) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        fetchNextPage();
+      }
+    });
+    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
+
+    return () => {
+      if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
+    };
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      {data?.pages.map((page, pageIndex) => (
+        <React.Fragment key={pageIndex}>
+          {page.collection.items.map((item, i) => (
+            <AssetElement key={i} asset={item} />
+          ))}
+        </React.Fragment>
+      ))}
+
+      <div ref={loadMoreRef} style={{ height: "20px", margin: "10px 0" }}>
+        {isFetchingNextPage
+          ? "Loading more..."
+          : hasNextPage
+            ? "Scroll to load more"
+            : "No more results"}
+      </div>
+    </div>
+  );
+};
+
+export default AssetsGrid;
