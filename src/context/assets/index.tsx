@@ -1,5 +1,9 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { fetchAssets } from "../../services/assetsApi";
 import type { ApiResponse } from "../../services/assetsApi/types";
 
@@ -10,7 +14,7 @@ interface AssetsContextProps {
   hasNextPage: boolean;
   fetchNextPage: () => void;
   isFetchingNextPage: boolean;
-  search: (query: string, mediaType?: string) => void;
+  handleSearch: (query: string, mediaType?: string) => void;
 }
 
 const AssetsContext = createContext<AssetsContextProps | undefined>(undefined);
@@ -47,7 +51,7 @@ export const AssetsProvider: React.FC<AssetsProviderProps> = ({ children }) => {
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 
-  const search = (newQuery: string, newMediaType: string = "image") => {
+  const handleSearch = (newQuery: string, newMediaType: string = "image") => {
     setQuery(newQuery);
     setMediaType(newMediaType);
     queryClient.invalidateQueries({ queryKey: ["assets"] });
@@ -62,7 +66,7 @@ export const AssetsProvider: React.FC<AssetsProviderProps> = ({ children }) => {
         hasNextPage: !!hasNextPage,
         fetchNextPage,
         isFetchingNextPage,
-        search,
+        handleSearch,
       }}
     >
       {children}
